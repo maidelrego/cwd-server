@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ContactUsModule } from './contact-us/contact-us.module';
 import { QuotesModule } from './quotes/quotes.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { QuotesModule } from './quotes/quotes.module';
     }),
     ContactUsModule,
     QuotesModule,
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [],
