@@ -49,14 +49,14 @@ export class Quote {
   @Column('text')
   doorHandle: string;
 
-  @Column('boolean', { default: false })
-  delivery: boolean;
+  @Column('text')
+  installOrDelivery: string;
 
-  @Column('boolean', { default: false })
-  install: boolean;
+  @Column('numeric')
+  dimensionsH: number;
 
-  @Column('text', { array: true, default: '{}' })
-  dimensions: string[];
+  @Column('numeric')
+  dimensionsW: number;
 
   @CreateDateColumn()
   createdAt: Date;

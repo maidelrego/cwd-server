@@ -15,17 +15,27 @@ export class CloudinaryController {
 
   @Get('doorDesigns')
   async getDoorDesigns() {
-    return await this.cloudinary.getDoorDesigns();
+    return await this.cloudinary.getCloudinaryImages('Designs');
   }
 
   @Get('finishColors')
   async getDinishColors() {
-    return await this.cloudinary.getFinishColors();
+    return await this.cloudinary.getCloudinaryImages('Finish');
+  }
+
+  @Get('doorKits')
+  async getDoorKits() {
+    return await this.cloudinary.getCloudinaryImages('DoorKits');
+  }
+
+  @Get('handles')
+  async getHandles() {
+    return await this.cloudinary.getCloudinaryImages('Handles');
   }
 
   @Get('galleryImages')
   async getGalleryImages() {
-    return await this.cloudinary.getGalleryImages();
+    return await this.cloudinary.getCloudinaryImages('Gallery');
   }
 
   @Post('upload')

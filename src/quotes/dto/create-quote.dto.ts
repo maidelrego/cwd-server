@@ -1,6 +1,4 @@
 import {
-  IsArray,
-  IsBoolean,
   IsEmail,
   IsNumber,
   IsOptional,
@@ -53,16 +51,15 @@ export class CreateQuoteDto {
   @IsString()
   doorHandle: string;
 
-  @IsBoolean()
+  @IsString()
   @IsOptional()
-  delivery?: boolean;
+  installOrDelivery?: string;
 
-  @IsBoolean()
+  @IsNumber()
   @IsOptional()
-  install?: boolean;
+  dimensionsH?: number;
 
-  @IsString({ each: true })
+  @IsNumber()
   @IsOptional()
-  @IsArray()
-  dimensions?: string[];
+  dimensionsW?: number;
 }

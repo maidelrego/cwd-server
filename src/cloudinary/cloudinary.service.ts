@@ -4,42 +4,9 @@ import toStream = require('buffer-to-stream');
 
 @Injectable()
 export class CloudinaryService {
-  async getGalleryImages() {
+  async getCloudinaryImages(folderName: string) {
     const { resources } = await v2.search
-      .expression('folder:Gallery')
-      .sort_by('public_id', 'desc')
-      .execute();
-
-    const data = resources.map((resource) => {
-      return {
-        id: resource.asset_id,
-        url: resource.secure_url,
-      };
-    });
-
-    return data;
-  }
-
-  async getDoorDesigns() {
-    const { resources } = await v2.search
-      .expression('folder:Designs')
-      .sort_by('public_id', 'desc')
-      .execute();
-
-    const data = resources.map((resource) => {
-      return {
-        name: resource.filename,
-        id: resource.asset_id,
-        url: resource.secure_url,
-      };
-    });
-
-    return data;
-  }
-
-  async getFinishColors() {
-    const { resources } = await v2.search
-      .expression('folder:Finish')
+      .expression(`folder:${folderName}`)
       .sort_by('public_id', 'desc')
       .execute();
 
