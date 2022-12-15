@@ -4,23 +4,6 @@ import toStream = require('buffer-to-stream');
 
 @Injectable()
 export class CloudinaryService {
-  async getCloudinaryImages(folderName: string) {
-    const { resources } = await v2.search
-      .expression(`folder:${folderName}`)
-      .sort_by('public_id', 'desc')
-      .execute();
-
-    const data = resources.map((resource) => {
-      return {
-        name: resource.filename,
-        id: resource.asset_id,
-        url: resource.secure_url,
-      };
-    });
-
-    return data;
-  }
-
   async uploadImage(
     file: Express.Multer.File,
   ): Promise<UploadApiResponse | UploadApiErrorResponse> {
@@ -50,6 +33,8 @@ export class CloudinaryService {
 
   async deleteImages(asset_id: string) {
     const imageToDelete = await this.findImageByAssetId(asset_id);
+
+    console.log(imageToDelete);
 
     for (const img of imageToDelete) {
       await v2.uploader.destroy(img.public_id);

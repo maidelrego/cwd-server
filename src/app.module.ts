@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ContactUsModule } from './contact-us/contact-us.module';
 import { QuotesModule } from './quotes/quotes.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { CloudinaryImagesModule } from './cloudinary-images/cloudinary-images.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     ContactUsModule,
     QuotesModule,
     CloudinaryModule,
+    CloudinaryImagesModule,
   ],
   controllers: [],
   providers: [],
