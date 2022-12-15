@@ -33,4 +33,27 @@ export class CloudinaryService {
       toStream(file.buffer).pipe(upload);
     });
   }
+
+  async findImageByAssetId(asset_id: string) {
+    const { resources } = await v2.search
+      .expression(`asset_id:${asset_id}`)
+      .execute();
+
+    const data = resources.map((resource) => {
+      return {
+        public_id: resource.public_id,
+      };
+    });
+
+    return data;
+  }
+
+  async deleteImages(asset_id: string) {
+    const imageToDelete = await this.findImageByAssetId(asset_id);
+
+    for (const img of imageToDelete) {
+      await v2.uploader.destroy(img.public_id);
+    }
+    return { message: 'Image deleted successfully' };
+  }
 }

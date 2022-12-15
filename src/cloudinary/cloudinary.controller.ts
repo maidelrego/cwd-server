@@ -5,6 +5,8 @@ import {
   UploadedFile,
   Controller,
   Get,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from './cloudinary.service';
@@ -44,5 +46,10 @@ export class CloudinaryController {
     return await this.cloudinary.uploadImage(file).catch(() => {
       throw new BadRequestException('Invalid file type.');
     });
+  }
+
+  @Delete(':asset_id')
+  deleteImageFromCloudinary(@Param('asset_id') asset_id: string) {
+    return this.cloudinary.deleteImages(asset_id);
   }
 }
