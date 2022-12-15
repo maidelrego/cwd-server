@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsEmail,
   IsInt,
   IsNumber,
@@ -61,4 +62,7 @@ export class CreateQuoteDto {
   @IsNumber()
   @IsOptional()
   dimensionsW?: number;
+
+  @IsBoolean()
+  isRead: boolean;
 }

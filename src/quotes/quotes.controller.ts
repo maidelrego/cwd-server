@@ -6,9 +6,11 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Put,
 } from '@nestjs/common';
 import { QuotesService } from './quotes.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
+import { UpdateQuoteDto } from './dto/update-quote.dto';
 
 @Controller('quotes')
 export class QuotesController {
@@ -17,6 +19,11 @@ export class QuotesController {
   @Post()
   create(@Body() createQuoteDto: CreateQuoteDto) {
     return this.quotesService.create(createQuoteDto);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updateQuoteDto: UpdateQuoteDto) {
+    return this.quotesService.update(id, updateQuoteDto);
   }
 
   @Get()

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { Quote } from './entities/quote.entity';
+import { UpdateQuoteDto } from './dto/update-quote.dto';
 
 @Injectable()
 export class QuotesService {
@@ -16,6 +17,19 @@ export class QuotesService {
       const quote = this.quotesRepository.create(createQuoteDto);
       await this.quotesRepository.save(quote);
       return quote;
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error);
+    }
+  }
+
+  async update(id: number, updateQuoteDto: UpdateQuoteDto) {
+    try {
+      const quote = await this.findOne(id);
+      if (quote) {
+        await this.quotesRepository.update(id, updateQuoteDto);
+        return await this.findOne(id);
+      }
     } catch (error) {
       console.log(error);
       throw new BadRequestException(error);

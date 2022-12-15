@@ -58,6 +58,9 @@ export class Quote {
   @Column('numeric')
   dimensionsW: number;
 
+  @Column('bool', { default: false })
+  isRead: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 }

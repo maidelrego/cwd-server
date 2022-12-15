@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateContactUsDto } from './dto/create-contact-us.dto';
 import { ContactUs } from './entities/contact-us.entity';
+import { UpdateContactUsDto } from './dto/update-contact-us.dto';
 
 @Injectable()
 export class ContactUsService {
@@ -23,6 +24,18 @@ export class ContactUsService {
       const contactUs = this.contactUsRepository.create(createContactUsDto);
       await this.contactUsRepository.save(contactUs);
       return contactUs;
+    } catch (error) {
+      this.handleDatabaseExceptions(error);
+    }
+  }
+
+  async update(id: number, updateContactUsDto: UpdateContactUsDto) {
+    try {
+      const contactUs = await this.findOne(id);
+      if (contactUs) {
+        await this.contactUsRepository.update(id, updateContactUsDto);
+        return await this.findOne(id);
+      }
     } catch (error) {
       this.handleDatabaseExceptions(error);
     }
