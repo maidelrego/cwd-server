@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCloudinaryImageDto } from './dto/create-cloudinary-image.dto';
 import { CloudinaryImage } from './entities/cloudinary-image.entity';
+import { UpdateCloudinaryImageDto } from './dto/update-cloudinary-image.dto';
 
 @Injectable()
 export class CloudinaryImagesService {
@@ -37,15 +38,32 @@ export class CloudinaryImagesService {
     return cloudinaryImages;
   }
 
-  async findOne(assetId: string) {
+  async findOne(id: number) {
     const cloudinaryImage = await this.cloudinaryImageRepository.findOneBy({
-      assetId: assetId,
+      id: id,
     });
     return cloudinaryImage;
   }
 
-  async remove(assetId: string) {
-    const cloudinaryImage = await this.findOne(assetId);
+  async update(id: number, updateCloudinaryImageDto: UpdateCloudinaryImageDto) {
+    try {
+      const cloudinaryImage = await this.cloudinaryImageRepository.findOneBy({
+        id: id,
+      });
+      if (cloudinaryImage) {
+        const updatedData = await this.cloudinaryImageRepository.update(
+          id,
+          updateCloudinaryImageDto,
+        );
+        return updatedData;
+      }
+    } catch (error) {
+      this.handleDatabaseExceptions(error);
+    }
+  }
+
+  async remove(id: number) {
+    const cloudinaryImage = await this.findOne(id);
 
     if (cloudinaryImage) {
       await this.cloudinaryImageRepository.remove(cloudinaryImage);

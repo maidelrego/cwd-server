@@ -34,8 +34,6 @@ export class CloudinaryService {
   async deleteImages(asset_id: string) {
     const imageToDelete = await this.findImageByAssetId(asset_id);
 
-    console.log(imageToDelete);
-
     for (const img of imageToDelete) {
       await v2.uploader.destroy(img.public_id);
     }

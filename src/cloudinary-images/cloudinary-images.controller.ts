@@ -6,9 +6,11 @@ import {
   // Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { CloudinaryImagesService } from './cloudinary-images.service';
 import { CreateCloudinaryImageDto } from './dto/create-cloudinary-image.dto';
+import { UpdateCloudinaryImageDto } from './dto/update-cloudinary-image.dto';
 // import { UpdateCloudinaryImageDto } from './dto/update-cloudinary-image.dto';
 
 @Controller('cloudinary-images')
@@ -48,12 +50,20 @@ export class CloudinaryImagesController {
   }
 
   @Get(':id')
-  findOne(@Param('assetId') assetId: string) {
-    return this.cloudinaryImagesService.findOne(assetId);
+  findOne(@Param('id') id: number) {
+    return this.cloudinaryImagesService.findOne(+id);
   }
 
-  @Delete(':assetId')
-  remove(@Param('assetId') assetId: string) {
-    return this.cloudinaryImagesService.remove(assetId);
+  @Put(':id')
+  update(
+    @Param('id') id: number,
+    @Body() updateCloudinaryImageDto: UpdateCloudinaryImageDto,
+  ) {
+    return this.cloudinaryImagesService.update(id, updateCloudinaryImageDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.cloudinaryImagesService.remove(id);
   }
 }

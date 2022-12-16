@@ -29,7 +29,6 @@ export class CloudinaryController {
   ) {
     try {
       const uploadedImage = await this.cloudinary.uploadImage(file);
-      console.log(uploadedImage);
 
       if (uploadedImage) {
         createCloudinaryImageDto.url = uploadedImage.secure_url;
@@ -46,9 +45,10 @@ export class CloudinaryController {
     }
   }
 
-  @Delete(':asset_id')
-  async deleteImageFromCloudinary(@Param('asset_id') asset_id: string) {
-    await this.cloudinaryImageService.remove(asset_id);
+  @Delete(':id')
+  async deleteImageFromCloudinary(@Param('id') id: number) {
+    const cloudinaryImageData = await this.cloudinaryImageService.remove(id);
+    const asset_id = cloudinaryImageData.assetId;
     await this.cloudinary.deleteImages(asset_id);
     return 'Image deleted';
   }
