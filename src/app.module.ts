@@ -5,6 +5,8 @@ import { ContactUsModule } from './contact-us/contact-us.module';
 import { QuotesModule } from './quotes/quotes.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { CloudinaryImagesModule } from './cloudinary-images/cloudinary-images.module';
+import { AuthModule } from './auth/auth.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { CloudinaryImagesModule } from './cloudinary-images/cloudinary-images.mo
     QuotesModule,
     CloudinaryModule,
     CloudinaryImagesModule,
+    AuthModule,
+    SeedModule,
   ],
   controllers: [],
   providers: [],
