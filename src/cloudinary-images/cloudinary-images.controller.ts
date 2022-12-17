@@ -21,31 +21,26 @@ export class CloudinaryImagesController {
   ) {}
 
   @Get('doorDesigns')
-  @Auth(ValidRoles.admin)
   async getDoorDesigns() {
     return await this.cloudinaryImagesService.getCloudinaryImages('Designs');
   }
 
   @Get('finishColors')
-  @Auth(ValidRoles.admin)
   async getDinishColors() {
     return await this.cloudinaryImagesService.getCloudinaryImages('Finish');
   }
 
   @Get('doorKits')
-  @Auth(ValidRoles.admin)
   async getDoorKits() {
     return await this.cloudinaryImagesService.getCloudinaryImages('DoorKits');
   }
 
   @Get('handles')
-  @Auth(ValidRoles.admin)
   async getHandles() {
     return await this.cloudinaryImagesService.getCloudinaryImages('Handles');
   }
 
   @Get('galleryImages')
-  @Auth(ValidRoles.admin)
   async getGalleryImages() {
     return await this.cloudinaryImagesService.getCloudinaryImages('Gallery');
   }
